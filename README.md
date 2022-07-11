@@ -1,2 +1,2 @@
 # My movie gallery
-Este proyecto aun en dasarrollo, pretende ser una implementacion del modelo vista controlador MVC. Donde el modelo(se encuentra en la carpeta Model), se encarga realizar peticiones http a la API de "The Movie Data Base" -> https://api.themoviedb.org. Este proyecto aun se encuentra en desarrollo
+Este proyecto pretende ser una implementacion del modelo vista controlador MVC. Donde el modelo(se encuentra en la carpeta Model), se encarga realizar peticiones http a la API de "The Movie Data Base" -> https://api.themoviedb.org. Este proyecto aun se encuentra en desarrollo
