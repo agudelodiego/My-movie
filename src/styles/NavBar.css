@@ -1,0 +1,54 @@
+.NavBar__container{
+    width:100vw;
+    box-shadow: 0 0 2px 4px #F7F7F7;
+}
+.NavBar{
+    width:100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 15px;
+}
+.NavBar__icon{
+    height: 34px;
+    width: auto;
+}
+.NavBar__div{
+    display: flex;
+    align-items: center;
+}
+.NavBar__div-main{
+    justify-content: center;
+    width: 400px;
+
+}
+.NavBar__ul{
+    display: flex;
+    width: 230px;
+    justify-content: space-evenly;
+}
+.NavBar__li{
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+.NavBar__link{
+    text-decoration: none;
+    color: #232830;
+}
+
+
+/* Hacemos un que en dispositivos moviles se muestre el icono del menu y se escondan los links */
+@media screen and (min-width: 600px) {
+    .NavBar__div-menu{
+        display: none;
+    }
+}
+@media screen and (max-width: 600px) {
+    .NavBar__ul{
+        display: none;
+    }
+    .NavBar__div-acount{
+        display: none;
+    }
+}
