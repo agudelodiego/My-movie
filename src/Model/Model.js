@@ -18,6 +18,12 @@ const KEY = "579b5890d14bce4792901da9659754bb";
 
 
 
+//! NOTA: En el manejo de los errores con throw, me di cuenta de que lo podia hacer de manera que tuviera que programar menos lineas de codigo, no obstante, me di cuenta de ello demasiado tarde, puesto que ya habia terminado de programar todos los metodos. Se puede realizar la validacion simplemente asi: else if(status>=400){throw response}; por si lo deseas reemplazar, ahi te dejo como quedaria.
+
+
+
+
+
 //* --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*  DOCUMENTACION:
 La funcion GetPopulars se encarga de conectar con la API "THDB" y realizar la peticion segun los parametros que se le sean pasado a la funcion.
@@ -28,7 +34,7 @@ La funcion puede recibir dos parametro opcionales los cuales son:
     language --> Debe ser un string con la siguiente forma es-MX, en-US, ect, por defecto el lenguaje es es-MX
 
     RESPUESTA API SIN ERRORES
-Si NO ocurre ningun erro al enviar la peticion, la funcion devuelve un objeto de tipo Primise, el cual debe ser consumido, para de esta manera obtener un array, el cual contiene 20 objetos, correspondiente a las peliculas. Los objetos contenidos en el array tienen varias propiedades utiles para la aplicacion, misma que se explican a continuacion
+La API devuelve un objeto, el cual contiene varias propiedaes, entre ellas, y la mas importante es un array con 20 objetos, los cuales corresponden a las propias peliculas y su correspondiente informacion, para acceder a dicho array debes de utilizar la sintaxis respuestaAPI.results, esto te devolvera el aray mensionado. A su vez cada uno de los objetos de tipo pelicula contiene varias propiedades, entre las importantes tenemos las siguientes:
 
     objeto.adult -> Esta propiedad es un boolean, el cual indica si la pelicula en coestion tiene clasificacion para mayores de esdad o no
     objeto.
@@ -41,16 +47,19 @@ Si NO ocurre ningun erro al enviar la peticion, la funcion devuelve un objeto de
     
     objeto.original_language -> Contiene el lenguaje original de la pelicula
     
-    overveiw -> Contiene una breve descripcion de la pelicula*/
+    overveiw -> Contiene una breve descripcion de la pelicula
+    
+    RESPUESTA ERRONEA
+Si sucede algun error al hacer la peticion el metodo retornara un objeto que contiene propiedades como el status entre otras*/
 export const GetPopulars = async (page=1, language='es-MX') => {
 
     try{
         let URL = "https://api.themoviedb.org/3/movie";
         let endPoint = "/popular?";
         let url = `${URL}${endPoint}api_key=${KEY}&language=${language}&page=${page}`;
-        console.group("Url peticion");
-        console.log(url);
-        console.groupEnd();
+        // console.group("Url peticion");
+        // console.log(url);
+        // console.groupEnd();
 
         let response = await fetch(url);
         let status = response.status;
@@ -58,9 +67,9 @@ export const GetPopulars = async (page=1, language='es-MX') => {
         // Validacion de respuesta
         if(status === 200){
             let reponse_json = await response.json();
-            console.group("Respuesta exitosa del servidor");
-            console.log(reponse_json.results);
-            console.groupEnd();
+            // console.group("Respuesta exitosa del servidor");
+            // console.log(reponse_json.results);
+            // console.groupEnd();
             return reponse_json;
         }
         else if(status === 404){
@@ -75,11 +84,227 @@ export const GetPopulars = async (page=1, language='es-MX') => {
         
     }
     catch(err){
-        console.group("Ha ocurrido un error");
-        console.error(err);
-        console.groupEnd();
+        // console.group("Ha ocurrido un error");
+        // console.error(err);
+        // console.groupEnd();
         return err;
     }
 
 }
 //* --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+//* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*  DOCUMENTACION:
+Esta funcion se encarga de obtener los detalles de una determinada pelicula, recibe los siguiente parametros
+    idPelicula -> Identificador de la pelicaula, este parametro es obligatorio
+    language -> Lenguaje en que desea que le responda la API, por defecto esta en es-MX, este parametro es opcional
+
+    RESPUESTA API SIN ERRORES
+Este metodo asincrono devuelve un objeto el cual contiene varias propiedaes, entre las mas destacadas son:
+
+    objeto.genres -> Es un array de objetos los cuales contienen los generos a los que pertenece al pelicual
+
+    objeto.overview -> Pequeña descripcion de la pelicula 
+
+    objeto.production_companies -> Contiene un array con objetos, los cuales contienen la informacion de las compañias que aportaron para producir la pelicula
+
+    objeto.production_countries -> Contiene un array de objetos que contienen el codigo iso del pais asi como el nombre del pais
+    
+    RESPUESTA ERRONEA
+Si llegase a suceder algun error, el metodo devuelve un objeto con informacion acerca de la peticion, donde podra encontrar una descriopcion mas detallada acerca del error, como por ejemplo el status devuelto por el seridor entre otras cosas mas.*/
+export const GetDetails = async (idPelicula, language='es-MX') => {
+
+    try {
+
+        const URL = "https://api.themoviedb.org/3/movie";
+        let endPoint = `/${idPelicula}?`;
+        let url = `${URL}${endPoint}api_key=${KEY}&language=${language}`;
+
+        // console.log(`Url: ${url}`);
+
+        let response = await fetch(url);
+        let status = response.status;
+        
+        // Validacion de respuesta
+        if(status === 200){
+            let reponse_json = await response.json();
+            // console.group("Respuesta exitosa del servidor");
+            // console.log(reponse_json.results);
+            // console.groupEnd();
+            return reponse_json;
+        }
+        else if(status === 404){
+            throw response;
+        }
+        else if(status === 401){
+            throw response;
+        }
+        else{
+            throw response;
+        }
+
+    }
+    catch(err){
+        return err;
+    }
+}
+//* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+//* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*  DOCUMENTACION:
+Este metodo se encarga de solicitar las peliculas que se encuentran proximas a salir
+
+    RESPUESTA API SIN ERRORES
+Este metodo devuelve un objeto el cual contiene propiedades como la pagina en que se encuentra, la cantidad de paginas disponible, y las mas importante de todas es un array con 20 objetos, los cuales corresponden a las peliculas. Cada objeto pelicula dentro del array a su vez contiene varios atributos con informacion relative acerca de la pelicula. Para acceder al array utlice la siguiente sintaxis: respuestaAPI.results. Algunas de las propiedades mas relevantes de cada pelicula se ven acontinuacion:
+
+    objetoPeicula.release_date -> Corresponde a la fecha de estreno de la pelicula
+
+    objeto.adult -> Esta propiedad es un boolean, el cual indica si la pelicula en coestion tiene clasificacion para mayores de esdad o no
+    objeto.
+
+    objeto.id -> Contiene el id de la pelicula, es muy util para obtener informacion mas detallada acerca de las peliculas
+    
+    objeto.poster_path -> Esta propiedad contiene el path mediante el cual poder acceder a la imagen de al pelicula. Para acceder al dicho poster debes de utlizar la funcion GetPoster
+    
+    objeto.original_title -> Contiene titulo de la pelicula
+    
+    objeto.original_language -> Contiene el lenguaje original de la pelicula
+    
+    overveiw -> Contiene una breve descripcion de la pelicula
+
+    RESPUESTA ERRONEA
+Si ocurrio algun error al hacer la peticion el metodo devuelve un objeto con informacion acerca de lo sucedido, como por ejemplo el status, entre otras cosas*/ 
+export const GetUpcoming = async (page=1, language='es-MX')=>{
+
+    try{
+        
+        const URL = "https://api.themoviedb.org/3/movie/upcoming?";
+        let url = `${URL}api_key=${KEY}&page=${page}&language=${language}`;
+
+        console.log(`Url: ${url}`);
+
+        let response = await fetch(url);
+        let status = response.status;
+        
+        // Validacion de respuesta
+        if(status === 200){
+            let reponse_json = await response.json();
+            // console.group("Respuesta exitosa del servidor");
+            // console.log(reponse_json.results);
+            // console.groupEnd();
+            return reponse_json;
+        }
+        else if(status === 404){
+            throw response;
+        }
+        else if(status === 401){
+            throw response;
+        }
+        else{
+            throw response;
+        }
+
+    }
+    catch(err){
+        return err;
+    }
+}
+//* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*  DOCUMENTACION:
+Este metodo funcion de manera exacta a los metodos anteriores, solo que en lugar de devolver peliculas populares, o nuevos lanzamientos, este devuelve las peliculas que se encuentran en cartera. Lo demas funcion exactamente igual*/
+export const GetPlayNow = async (page=1, language='es-MX')=>{
+
+    try{
+        const URL = "https://api.themoviedb.org/3/movie/now_playing?";
+        let url = `${URL}api_key=${KEY}&page=${page}&language=${language}`;
+
+        let response = await fetch(url);
+        let status = response.status;
+        
+        // Validacion de respuesta
+        if(status === 200){
+            let reponse_json = await response.json();
+            // console.group("Respuesta exitosa del servidor");
+            // console.log(reponse_json.results);
+            // console.groupEnd();
+            return reponse_json;
+        }
+        else if(status === 404){
+            throw response;
+        }
+        else if(status === 401){
+            throw response;
+        }
+        else{
+            throw response;
+        }
+    }
+    catch(err){
+        return err;
+    }
+    
+} 
+//* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*  DOCUMENTACION:
+Esta funcion solo se encarga de devolver la url donde puede encontrar el poster de la lepicula en coestion. Para utilizarla solo se debe de invocar y pasarle un el poster_paht de la pelicula que desee */
+export const GetPoster = (path) => {
+    let urlPoster = `https://image.tmdb.org/t/p/w500${path}`;
+    // console.group("Poster Path");
+    // console.log(urlPoster);
+    // console.groupEnd();
+    return urlPoster;
+} 
+//* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+// Pruebas
+GetPopulars(3)
+    .then((res)=>{
+        let pelis = res.results;
+        let pelicuala = pelis[3];
+        let poster = GetPoster(pelicuala.poster_path);
+        let id = pelicuala.id
+        console.log(poster);
+
+        // Obtenemos los detalles de la pelicula mediante el id
+        return GetDetails(id);
+    })
+    .then((details)=>{
+        console.log(details);
+        return GetUpcoming();
+    })
+    .then((res)=>{
+        console.log(res);
+        return GetPlayNow();
+    })
+    .then((res)=>{
+        console.log(res);
+    })
+    .catch((e)=>{
+        console.error("Error: "+e);
+    })
