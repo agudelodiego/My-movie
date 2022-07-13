@@ -57,9 +57,6 @@ export const GetPopulars = async (page=1, language='es-MX') => {
         let URL = "https://api.themoviedb.org/3/movie";
         let endPoint = "/popular?";
         let url = `${URL}${endPoint}api_key=${KEY}&language=${language}&page=${page}`;
-        // console.group("Url peticion");
-        // console.log(url);
-        // console.groupEnd();
 
         let response = await fetch(url);
         let status = response.status;
@@ -67,9 +64,6 @@ export const GetPopulars = async (page=1, language='es-MX') => {
         // Validacion de respuesta
         if(status === 200){
             let reponse_json = await response.json();
-            // console.group("Respuesta exitosa del servidor");
-            // console.log(reponse_json.results);
-            // console.groupEnd();
             return reponse_json;
         }
         else if(status === 404){
@@ -84,9 +78,6 @@ export const GetPopulars = async (page=1, language='es-MX') => {
         
     }
     catch(err){
-        // console.group("Ha ocurrido un error");
-        // console.error(err);
-        // console.groupEnd();
         return err;
     }
 
@@ -126,17 +117,12 @@ export const GetDetails = async (idPelicula, language='es-MX') => {
         let endPoint = `/${idPelicula}?`;
         let url = `${URL}${endPoint}api_key=${KEY}&language=${language}`;
 
-        // console.log(`Url: ${url}`);
-
         let response = await fetch(url);
         let status = response.status;
         
         // Validacion de respuesta
         if(status === 200){
             let reponse_json = await response.json();
-            // console.group("Respuesta exitosa del servidor");
-            // console.log(reponse_json.results);
-            // console.groupEnd();
             return reponse_json;
         }
         else if(status === 404){
@@ -192,17 +178,12 @@ export const GetUpcoming = async (page=1, language='es-MX')=>{
         const URL = "https://api.themoviedb.org/3/movie/upcoming?";
         let url = `${URL}api_key=${KEY}&page=${page}&language=${language}`;
 
-        console.log(`Url: ${url}`);
-
         let response = await fetch(url);
         let status = response.status;
         
         // Validacion de respuesta
         if(status === 200){
             let reponse_json = await response.json();
-            // console.group("Respuesta exitosa del servidor");
-            // console.log(reponse_json.results);
-            // console.groupEnd();
             return reponse_json;
         }
         else if(status === 404){
@@ -282,29 +263,97 @@ export const GetPoster = (path) => {
 
 
 
-// Pruebas
-GetPopulars(3)
-    .then((res)=>{
-        let pelis = res.results;
-        let pelicuala = pelis[3];
-        let poster = GetPoster(pelicuala.poster_path);
-        let id = pelicuala.id
-        console.log(poster);
 
-        // Obtenemos los detalles de la pelicula mediante el id
-        return GetDetails(id);
-    })
-    .then((details)=>{
-        console.log(details);
-        return GetUpcoming();
-    })
-    .then((res)=>{
-        console.log(res);
-        return GetPlayNow();
-    })
-    .then((res)=>{
-        console.log(res);
-    })
-    .catch((e)=>{
-        console.error("Error: "+e);
-    })
+
+
+// !---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//! PRUEBAS
+//*--------------- Consumiendo GetPopulars-----------------
+//   (page=1,language='es-MX') -> Estos son los parametros por defecto
+// GetPopulars(4,'en-US')
+//     .then((objetoPopulares)=>{
+
+//         console.group("Respuesta fcn GetPopulars");
+
+//         // Devuelve un objeto varias propiedades
+//         console.log(objetoPopulares);
+
+//         // Propiedad la cual contine un array con 20 objetos dentro, cada uno corresponde a un pelicula
+//         console.log(objetoPopulares.results);
+
+//         // Obtenemos el id de la pelicula que se encuentra en la posicion 4 del array
+//         let idAleatorio = objetoPopulares.results[4].id;
+        
+//         // Obtenemos la direccion del poster o la imagen de la pelicula
+//         let posterPath = objetoPopulares.results[4].poster_path;
+
+
+//         //* ---------Consumo de GetPoster------------
+//         // Esta nos devuelve la url del servidor donde se aloja dicha imagen, se le debe de pasar la propiedad poster_path del objeto pelicula
+//         let posterUrl = GetPoster(posterPath);
+//         console.log(posterUrl);
+
+//         console.groupEnd();
+
+//         //*----------- Consumiendo GetDetails----------
+//         // Le debemos pasar el id de una pelicula
+//         return GetDetails(idAleatorio,'en-US');
+//     })
+
+//     // Si no hay ningun error el return anterior devuelve un promesa que es necesario consumir
+//     .then((detallesPelicula)=>{
+
+//         // Devuelve un objeto
+//         console.group("Respuesta fcn GetDetails");
+//         console.log(detallesPelicula);
+//         console.groupEnd();
+
+//         // *------------Consumiendo GetUpcoming------------
+//         // (page=1, language='es-MX') --> Por defecto
+//         return GetUpcoming(3,'en-US');
+//     })
+
+//     // Respuesta de GetUpcoming
+//     .then((proximamente)=>{
+        
+//         console.group("Respuesta fcn GetUpcoming");
+
+//         // Devuelvu un objeto
+//         console.log(proximamente);
+
+        
+//         // Propiedad que contiene un array con 20 objetos, en el cual cada un representa una pelicula
+//         console.log(proximamente.results);
+//         console.groupEnd();
+
+//         // *------------Consumiendo GetPlayNow------------
+//         // Tiene los mimso parametros por defecto que los demas
+//         return GetPlayNow(4,'en-US');
+
+//     })
+
+//     // Respuesta que devuelve GetPlayNow
+//     .then((enCarterela)=>{
+
+//         console.group("Respuesta GetPlayNow");
+
+//         // Devuelve un objeto 
+//         console.log(enCarterela);
+
+//         // Contiene un array con 20 peliculas
+//         console.log(enCarterela.results);
+
+//         // Acedemos a la fecha de estreno de uno de los objetos dentro de dicho array
+//         console.log(enCarterela.results[5].release_date);
+//         console.groupEnd();
+//     })
+
+//     // !Manejo de errores
+//     .catch((error)=>{
+//         console.group("Respuesta Erronea");
+
+//         // Devuelve un objeto con informacion acerca de lo sucedido
+//         console.log(error);
+//         console.groupEnd();
+//     })
+// !---------------------------------------------------------------------------------------------------------------------------------------------------------------------
