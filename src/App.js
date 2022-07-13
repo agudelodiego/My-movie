@@ -1,6 +1,6 @@
 import "./App.css";
 import NavBar from "./componentes/NavBar";
-import {GetPopulars} from "./Model/Model.js"
+import {GetPopulars,GetPoster,GetDetails} from "./Model/Model.js"
 
 
 
