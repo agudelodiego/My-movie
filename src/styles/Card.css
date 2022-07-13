@@ -1,0 +1,46 @@
+/* Estilos para nuestras cards */
+.Card{
+    width: 140px;
+    height: auto;
+}
+.Card__posterContainer{
+    width: 100%;
+    height: 200px;
+}
+.Card__poster{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.Card__titulo{
+    font-size: 12px;
+    text-align: center;
+}
+
+
+
+/* Adaptamos a dispositivos mas grandes con media querys */
+@media screen and (min-width: 750px) and (max-width: 900px) { 
+    .Card{
+        width: 180px;
+    }
+    .Card__posterContainer{
+        height: 240px;
+    }   
+    .Card__titulo{
+        font-size: 15px;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .Card{
+        width: 230px;
+    }
+    .Card__posterContainer{
+        height: 300px;
+    }   
+    .Card__titulo{
+        font-size: 17px;
+    }
+}  

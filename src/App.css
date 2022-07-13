@@ -7,3 +7,13 @@
 body {
   width: 100vw;
 }
+
+/* !Estos estilos son solo para visualizar mejor las pruebas que se van a realizar, por favor omitir */
+
+.Pruebas{
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
