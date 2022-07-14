@@ -2,6 +2,14 @@
 .Card{
     width: 140px;
     height: auto;
+    border-radius: 7px;
+    padding: 4px;
+    transition: box-shadow .4s;
+    align-self: center;
+    justify-self: center;
+}
+.Card:hover{
+    box-shadow: 4px 4px 3px #8c8c8c;
 }
 .Card__posterContainer{
     width: 100%;

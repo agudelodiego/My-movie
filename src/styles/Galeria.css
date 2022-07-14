@@ -1,0 +1,28 @@
+.Galeria{
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,160px);
+    gap: 12px;
+    grid-auto-rows: 270px;
+    justify-content: center;
+}
+
+
+
+/* Adaptamos a dispositivos con diferentes resolucones */
+@media screen and (min-width: 750px) and (max-width: 900px){
+    .Galeria{
+        grid-template-columns: repeat(auto-fill,200px);
+        grid-auto-rows: 320px;
+    }
+}
+
+@media screen and (min-width: 900px){
+    .Galeria{
+        grid-template-columns: repeat(auto-fill,250px);
+        grid-auto-rows: 370px;
+    }
+}

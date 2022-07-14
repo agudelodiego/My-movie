@@ -9,7 +9,7 @@ const Card = (props) =>{
     return(
         <figure className="Card" id={props.id}>
             <div className="Card__posterContainer">
-                <img src={props.path} alt={props.descripcion} className="Card__poster" />    
+                <img src={props.src} alt={props.alt} className="Card__poster" />    
             </div>
             <figcaption className="Card__tituloContainer">
                 <h2 className="Card__titulo">{props.titulo}</h2>
