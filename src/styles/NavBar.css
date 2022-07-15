@@ -29,12 +29,19 @@
 .NavBar__ul{
     display: flex;
     width: 230px;
+    height: 100%;
     justify-content: space-evenly;
 }
 .NavBar__li{
     list-style: none;
     display: flex;
     align-items: center;
+    height: 100%;
+    border-bottom: 3.4px solid #fff;
+    transition: border-bottom 0.4s;
+}
+.NavBar__li:hover{
+    border-bottom: 3.4px solid #72c8f1;
 }
 .NavBar__link{
     text-decoration: none;

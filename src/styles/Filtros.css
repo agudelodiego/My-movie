@@ -5,15 +5,11 @@
     height: auto;
     z-index: 50;
     position: relative;
+    cursor: pointer;
 }
 .desplegable__icon{
     height: 32px;
     width: auto;
-}
-.desplegable__icon-flecha{
-    position: absolute;
-    top: 0;
-    right: 7px;
 }
 .desplegable__select{
     width: 100%;
@@ -26,11 +22,11 @@
     justify-content: space-evenly;
     align-items: center;
     border: 2px solid #fff;
-    transition: border 0.4s, background-color 0.4s;
+    background-color: #e4f4fd;
+    transition: border 0.4s;
 }
 .desplegable__opcion:hover{
-    border: 2px solid #72c8f1;
-    background-color: #e4f4fd;
+    border: 2px solid #1463c3;
 }
 .desplegable__select{
     width: 100%;
@@ -39,15 +35,13 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-}
-.desplegable__selectContainer{
     position: relative;
     box-shadow: 0 0 5px #72c8f1;
     border-radius: 5px;
     transition: box-shadow 0.6s;
     z-index: 100;
 }
-.desplegable__selectContainer:hover{
+.desplegable__select:hover{
     box-shadow: 0 3px 4px #72c8f1;
 }
 
