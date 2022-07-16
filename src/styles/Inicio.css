@@ -1,0 +1,26 @@
+.inicio{
+    padding: 0;
+    width: 100vw;
+    display: grid;
+    grid-template-areas: 
+        "filtros   galeria  galeria  galeria"
+        "filtros   galeria  galeria  galeria"
+        "filtros   galeria  galeria  galeria"
+        "filtros   galeria  galeria  galeria";
+}
+.inicio__galeria{
+    grid-area: galeria;
+    width: 75vw;
+    padding: 20px 0 0 0;
+}
+.inicio__asideBar{
+    grid-area: filtros;
+    width: 25vw;
+    height: auto;
+    padding: 40px 0 0 15px;;
+}
+.inicio__descripcion{
+    position: fixed;
+    background-color: red;
+    margin-top: 200px
+}

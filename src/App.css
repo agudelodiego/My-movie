@@ -3,22 +3,11 @@
   padding: 0;
   font-family: 'Quicksand', sans-serif;
   box-sizing: border-box;
+  font-size: 14px;
+
 }
 body {
   width: 100vw;
 }
 
 /* !Estos estilos son solo para visualizar mejor las pruebas que se van a realizar, por favor omitir */
-
-.Pruebas{
-  display: flex;
-  justify-content:center;
-  align-items:center;
-}
-.Pruebas2{
-  width: 400px;
-  height: auto;
-  display: flex;
-  justify-content:center;
-  align-items: center;
-}

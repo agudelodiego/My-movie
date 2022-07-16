@@ -7,7 +7,7 @@ import '../styles/Card.css';
 const Card = (props) =>{
 
     return(
-        <figure className="Card" id={props.id}>
+        <figure onClick={()=>props.click(props.id, props.titulo, props.overveiw)} className="Card" id={props.id}>
             <div className="Card__posterContainer">
                 <img src={props.src} alt={props.alt} className="Card__poster" />    
             </div>

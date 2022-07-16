@@ -1,14 +1,19 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "../styles/Filtros.css";
 
 
 
 
 
-const Filtros = () => {
+const Filtros = (props) => {
 
     // Utilizamos un hook de estado
     let [filtro, setFiltro] = useState("Peliculas populares");
+
+    // Utilizamos el useEffect para que cada vez que se actualice el estado filtro, este componente le avise al componenete padre que el usuario quiere cambiar el filtro 
+    useEffect(()=>{
+        props.llamar(filtro)
+    });
 
     return (
         <form className="desplegable">

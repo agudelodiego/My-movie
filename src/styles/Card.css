@@ -9,7 +9,7 @@
     justify-self: center;
 }
 .Card:hover{
-    box-shadow: 4px 4px 3px #8c8c8c;
+    box-shadow: 6px 6px 3px #8c8c8c;
 }
 .Card__posterContainer{
     width: 100%;
@@ -22,8 +22,10 @@
     border-radius: 10px;
 }
 .Card__titulo{
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
+    font-weight: 500;
+    color: #686868;
 }
 
 

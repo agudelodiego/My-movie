@@ -269,7 +269,7 @@ export const GetPoster = (path) => {
 // !---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //! PRUEBAS
 //*--------------- Consumiendo GetPopulars-----------------
-// //   (page=1,language='es-MX') -> Estos son los parametros por defecto
+//   (page=1,language='es-MX') -> Estos son los parametros por defecto
 // GetPopulars(4,'en-US')
 //     .then((objetoPopulares)=>{
 
