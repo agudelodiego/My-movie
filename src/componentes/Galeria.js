@@ -7,41 +7,69 @@ import '../styles/Galeria.css';
 
 
 // Elemento galeria, en el cual estaran todas las Cards que contendran las peliculas 
-const Galeria = (props)=>{
+const Galeria = (props) => {
 
-    // Utilizamos un hook para almacenar el array de las cards que se van a crear dinamicamente
-    const [cards, setCards] = useState([]);
+    // Variable de estado que almacena las cards que luego seran renderizadas en la aplicacion
+    const [cards,setCards] = useState([]);
 
-    let peliculasArray;
-    let page = props.page;
-    let language = props.language;
+    // Usamos un hook de efecto que se ejecute cada vez que el usuario cabie de filtro, la pagina o el idioma
+    useEffect(()=>{
 
+        // Funcion encargada de comunicarse con el Modelo.js y enviarle la informacion necesaria para que este realice la peticion a la API
+        let peticionAsincrona = async()=>{
 
-    // El elemento padre indica a cual de las funciones descritas en ./src/Modelo/Model.js debe acceder
-    let solicitar = props.solicitar;
-    // Se supone que el elemento padre nos devuelve una funcion callback
-    solicitar(page,language)
-        .then((response) => {
-            peliculasArray = response.results;
-            let cardsArray = peliculasArray.map((pelicula)=>{
-                
-                return(
-                    <Card id={pelicula.id} src={GetPoster(pelicula.poster_path)} alt={pelicula.title} titulo={pelicula.title} key={pelicula.id} click={props.click} overveiw={pelicula.overview} />
-                );
-            });
+            try{
+                // Validamos el tipo de peticio
+                let tipo = props.solicitar;
+                let peliculas;
 
-            setCards(cardsArray);
+                if(tipo === "Peliculas populares"){
+                    let data = await GetPopulars(props.page, props.language);
+                    peliculas = data.results;
+                    let intercambioCards = peliculas.map((pelicula)=>{
+                        return(
+                            <Card id={pelicula.id} src={GetPoster(pelicula.poster_path)} alt={pelicula.title} titulo={pelicula.title} key={pelicula.id} click={props.click} overveiw={pelicula.overview} />
+                        );
+                    });
+                    setCards(intercambioCards);
+                }
+                else if(tipo === "Nuevos lanzamientos"){
+                    let data = await GetUpcoming(props.page, props.language);
+                    peliculas = data.results;
+                    let intercambioCards = peliculas.map((pelicula)=>{
+                        return(
+                            <Card id={pelicula.id} src={GetPoster(pelicula.poster_path)} alt={pelicula.title} titulo={pelicula.title} key={pelicula.id} click={props.click} overveiw={pelicula.overview} />
+                        );
+                    });
+                    setCards(intercambioCards);
+                }
+                else if(tipo === "Peliculas en cartelera"){
+                    let data = await GetPlayNow(props.page, props.language);
+                    peliculas = data.results;
+                    let intercambioCards = peliculas.map((pelicula)=>{
+                        return(
+                            <Card id={pelicula.id} src={GetPoster(pelicula.poster_path)} alt={pelicula.title} titulo={pelicula.title} key={pelicula.id} click={props.click} overveiw={pelicula.overview} />
+                        );
+                    });
+                    setCards(intercambioCards);
+                }
+            }
+            catch(error){
+                console.error(error);
+            }
+        };
 
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+        peticionAsincrona();
 
-        return(
-            <main className="Galeria">
-                {cards}
-            </main>
-        );
+    },[props.solicitar,props.page, props.language]);
+
+    // Retornamos las Cards construidas mediante el useEffect
+    return (
+        <main className="Galeria" >
+            {cards}
+        </main>
+    );
+
 }
 
 

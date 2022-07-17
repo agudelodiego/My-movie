@@ -14,7 +14,6 @@ const Inicio = ()=>{
     const [filtros,setFiltros] = useState("Peliculas populares");
     const [pelicula,setPelicula] = useState(null);
     const [page, setPage] = useState("1");
-    let callback = GetPopulars;
 
     // El elemento Filtros llamara a aesta funcion cada vez que desee actualizar el estado de los filtros del componente inicio
     const actualizar = (nuevo)=>{
@@ -40,24 +39,14 @@ const Inicio = ()=>{
         setPelicula({id,titulo,descripcion});
         mostrarDescripcion();
     }
-
-
-    if(filtros === "Peliculas populares"){
-        callback = GetPopulars;
-    }
-    else if(filtros === "Nuevos lanzamientos"){
-        callback = GetUpcoming;
-    }
-    else if(filtros === "Peliculas en cartelera"){
-        callback = GetPlayNow;
-    }
+    
 
     return (
 
         <div className="inicio">
             
             <section className="inicio__galeria">
-                <Galeria page={page} language="es-MX" solicitar={callback} click={seleccionarPelicula} />
+                <Galeria page={page} language="es-MX" solicitar={filtros} click={seleccionarPelicula} />
             </section>
 
             <aside className="inicio__asideBar">
