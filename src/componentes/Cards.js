@@ -1,5 +1,5 @@
-import React from 'react';
-import '../styles/Card.css';
+import React from "react";
+import "../styles/Card.css";
 
 
 

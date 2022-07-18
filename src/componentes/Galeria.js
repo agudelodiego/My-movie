@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import Card from './Cards.js';
+import React, {useState, useEffect} from "react";
+import Card from "./Cards.js";
 import {GetPoster,GetPopulars,GetPlayNow,GetUpcoming} from "../Model/Model.js";
-import '../styles/Galeria.css';
+import "../styles/Galeria.css";
 
 
 
