@@ -10,7 +10,7 @@ const Paginacion = (props)=>{
 
     const [page,setPage] = useState(1);
     const [left,setLeft] = useState(false);
-    const [right,setRight] = useState(true);
+    const [right,] = useState(true);
 
     const aumentar = ()=>{
         setPage(page + 1);
