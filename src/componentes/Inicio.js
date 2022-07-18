@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import "../styles/Inicio.css";
 import Galeria from "./Galeria.js";
 import Filtros from "./Filtros.js";
 import Descripcion from "./Descripcion.js";
 import Paginacion from "./Paginacion.js";
-import {GetPopulars,GetUpcoming,GetPlayNow} from "../Model/Model.js";
 
 
 
@@ -59,7 +58,9 @@ const Inicio = ()=>{
             </div>
 
             {pelicula && 
-                <Descripcion click={esconderDescripcion} titulo={pelicula.titulo} contenido={pelicula.descripcion} />
+                <div className="inicio__descripcion">
+                    <Descripcion click={esconderDescripcion} titulo={pelicula.titulo} contenido={pelicula.descripcion} />
+                </div>
             }
             
         </div>

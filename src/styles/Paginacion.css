@@ -5,11 +5,8 @@
     justify-content: center;
     padding: 30px 0 50px 0;
 }
-.paginacion__pagina{
-    font-size: 30px;
-}
 .paginacion__icon{
-    height: 32px;
+    height: 30px;
     width: auto;
 }
 .paginacion__iconIzquierda{

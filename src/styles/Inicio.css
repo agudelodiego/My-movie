@@ -22,7 +22,7 @@
 .inicio__descripcion{
     position: fixed;
     background-color: red;
-    margin-top: 200px
+    margin-top: 200px;
 }
 .inicio__paginacion{
     width: 75vw;
@@ -30,4 +30,29 @@
     grid-area: paginas;
     display: flex;
     justify-content: center;
+}
+
+
+
+
+/* Adaptamos a los diferentes tamaños de dispositivos */
+@media screen and (max-width: 1000px){
+    .inicio{
+        grid-template-areas: 
+        "filtros   filtros  filtros  filtros"
+        "galeria   galeria  galeria  galeria"
+        "galeria   galeria  galeria  galeria"
+        "paginas   paginas  paginas  paginas";
+    }
+    .inicio__galeria{
+        width: 100vw;
+    }
+    .inicio__asideBar{
+        width: 80vw;
+        margin: auto;
+    }
+    .inicio__paginacion{
+        width: 100vw;
+        grid-area: paginas;
+    }
 }

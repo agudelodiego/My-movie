@@ -22,7 +22,6 @@
     border-radius: 10px;
 }
 .Card__titulo{
-    font-size: 14px;
     text-align: center;
     font-weight: 500;
     color: #686868;
@@ -37,9 +36,6 @@
     }
     .Card__posterContainer{
         height: 240px;
-    }   
-    .Card__titulo{
-        font-size: 15px;
     }
 }
 
@@ -49,8 +45,5 @@
     }
     .Card__posterContainer{
         height: 300px;
-    }   
-    .Card__titulo{
-        font-size: 17px;
     }
 }  

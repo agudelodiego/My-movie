@@ -1,10 +1,9 @@
 .descripcion{
     padding: 15px;
-    width: 100%;
+    width: 25vw;
     height: auto;
     max-height: 50vh;
     overflow: auto;
-    width: 25vw;
     position: fixed;
     bottom: 10px;
     left: 10px;
@@ -14,7 +13,6 @@
 }
 .descripcion__titulo{
     text-align: center;
-    font-size: 18px;
     padding: 30px 0;
 }
 .descripcion__icon{
@@ -63,4 +61,12 @@
 .descripcion::-webkit-scrollbar-thumb{
     background-color: #1463c3;
     border-radius:3px;
+}
+
+
+/* Adaptamos a diferentes resolucones */
+@media screen and (max-width: 1000px){
+    .descripcion{
+        width: 95vw;
+    }
 }

@@ -1,5 +1,5 @@
 .NavBar__container{
-    width:100%;
+    width:100vw;
     box-sizing: border-box;
     overflow: hidden;
     box-shadow: 0 0 2px 4px #F7F7F7;
@@ -25,6 +25,9 @@
     justify-content: center;
     width: 400px;
 
+}
+.NavBar__div-acount{
+    padding-right: 40px;
 }
 .NavBar__ul{
     display: flex;

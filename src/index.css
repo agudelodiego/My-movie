@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    box-sizing: border-box;
+}
+body{
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    font-size: 14px;
+}
+
+body::-webkit-scrollbar{
+    width: 9px;
+}
+body::-webkit-scrollbar-thumb{
+    background-color: #1463c3;
+    border-radius: 5px;
+}
+h1,h2{
+    font-size: inherit;
+}
+#root{
+    width: inherit;
+    margin: inherit;
+    padding: inherit;
+    box-sizing: inherit;
+}
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+    body{
+        font-size: 14px;
+    }
+}
+@media screen and (min-width: 1000px) {
+    body{
+        font-size: 18px;
+    }
+}
