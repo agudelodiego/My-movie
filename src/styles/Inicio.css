@@ -6,7 +6,7 @@
         "filtros   galeria  galeria  galeria"
         "filtros   galeria  galeria  galeria"
         "filtros   galeria  galeria  galeria"
-        "filtros   galeria  galeria  galeria";
+        "filtros   paginas  paginas  paginas";
 }
 .inicio__galeria{
     grid-area: galeria;
@@ -23,4 +23,11 @@
     position: fixed;
     background-color: red;
     margin-top: 200px
+}
+.inicio__paginacion{
+    width: 75vw;
+    height: auto;
+    grid-area: paginas;
+    display: flex;
+    justify-content: center;
 }

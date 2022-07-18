@@ -3,6 +3,7 @@ import "../styles/Inicio.css";
 import Galeria from "./Galeria.js";
 import Filtros from "./Filtros.js";
 import Descripcion from "./Descripcion.js";
+import Paginacion from "./Paginacion.js";
 import {GetPopulars,GetUpcoming,GetPlayNow} from "../Model/Model.js";
 
 
@@ -13,7 +14,7 @@ const Inicio = ()=>{
 
     const [filtros,setFiltros] = useState("Peliculas populares");
     const [pelicula,setPelicula] = useState(null);
-    const [page, setPage] = useState("1");
+    const [page, setPage] = useState(1);
 
     // El elemento Filtros llamara a aesta funcion cada vez que desee actualizar el estado de los filtros del componente inicio
     const actualizar = (nuevo)=>{
@@ -32,7 +33,7 @@ const Inicio = ()=>{
             recuadro.classList.remove("descripcion-esconder");
         }   
         catch(err){
-            console.log("Manejando error");
+            console.log("Doble ejecucion");
         }
     }
     const seleccionarPelicula = (id,titulo,descripcion)=>{
@@ -52,6 +53,10 @@ const Inicio = ()=>{
             <aside className="inicio__asideBar">
                 <Filtros llamar={actualizar} />
             </aside>
+
+            <div className="inicio__paginacion">
+                <Paginacion setear={setPage} />
+            </div>
 
             {pelicula && 
                 <Descripcion click={esconderDescripcion} titulo={pelicula.titulo} contenido={pelicula.descripcion} />
